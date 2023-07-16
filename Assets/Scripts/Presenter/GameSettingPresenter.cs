@@ -2,6 +2,7 @@ using System;
 using Domain.Model;
 using Domain.UseCase.Interface;
 using UniRx;
+using UnityEngine;
 using VContainer.Unity;
 using View.Interface;
 
@@ -89,7 +90,7 @@ namespace Presenter
         {
             _gameSettingView
                 .OnTapBlaveStarButtonAsObservable
-                .Subscribe(index =>
+                .Subscribe(_ =>
                 {
                     var bullet = StarBullet.Beveled;
                     _useCase.ChangeStarBullet(bullet);
@@ -99,7 +100,7 @@ namespace Presenter
 
             _gameSettingView
                 .OnTapHardStarButtonAsObservable
-                .Subscribe(index =>
+                .Subscribe(_ =>
                 {
                     var bullet = StarBullet.Hard;
                     _useCase.ChangeStarBullet(bullet);
@@ -109,7 +110,7 @@ namespace Presenter
 
             _gameSettingView
                 .OnTapSoftStarButtonAsObservable
-                .Subscribe(index =>
+                .Subscribe(_ =>
                 {
                     var bullet = StarBullet.Soft;
                     _useCase.ChangeStarBullet(bullet);
