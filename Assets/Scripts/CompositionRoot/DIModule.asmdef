@@ -1,0 +1,25 @@
+{
+    "name": "DIModule",
+    "rootNamespace": "",
+    "references": [
+        "GUID:fbe19e5e7247d4c8ca47032271cbebbd",
+        "GUID:af963c7de402b4eb9bab1675aec55704",
+        "GUID:1c3fdc37ed972429cbb3556467e48a54",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:a9420e37d7990b54abdef6688edbe313",
+        "GUID:c41361d85594648b897afa0d6e398c45"
+    ],
+    "includePlatforms": [
+        "Editor",
+        "iOS",
+        "macOSStandalone"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

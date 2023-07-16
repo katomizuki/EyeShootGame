@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 60fff96953d9d434bb692aa62b206e67
+  m_SerializeEntries:
+  - m_GUID: 1293b0763d7d344e0b908c097078ac09
+    m_Address: Assets/Prefabs/Asteroid_A.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5513cde93bb3343768ced35921a9c3c2
+    m_Address: Assets/Prefabs/Asteroid_B.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a6d3ccfc58a1f41368479aabb6050561
+    m_Address: Assets/Prefabs/Asteroid_C.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8f226a393243a0141bace5fd6b60bafa
+    m_Address: Assets/Prefabs/SoftStar.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f5c872ee906a85b46aa65e0ab683ed9f
+    m_Address: Assets/Prefabs/BeveledStar.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c4bf8b30fce268044a786a8600922324
+    m_Address: Assets/Prefabs/HardStar.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 0ceb048e9f6bd4d8a9b1fa4d64ff65f2, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 14be1644e3f8246b3aef9dfe22772522, type: 2}
+    - {fileID: 11400000, guid: a58a894f20ceb4a428d97293f84255b5, type: 2}

@@ -1,0 +1,4 @@
+framework module SwiftPmPlugin {
+  header "SwiftPmPlugin-Swift.h"
+  requires objc
+}

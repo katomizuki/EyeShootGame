@@ -1,0 +1,79 @@
+#pragma kernel CSMain
+
+#define PI 3.14159265359
+#define PI2 6.28318530718
+#define PI_DIV_2 1.57079633
+
+Texture2D<float4> source;
+RWTexture2D<float4> outputTex;
+float time;
+float aspectRatio;
+float texHeight;
+float texWidth;
+float4 axisColor;
+float4 sweepColor;
+
+float rotateLineSDF(float2 pos, float2 center, float radius, float width) {
+    // center=>posへのベクトル
+    float2 posVector = pos - center;
+    // 円周上を移動するベクトル
+    float2 circleVector = float2(cos(time), -sin(time)) * radius;
+    // 0 ~ 1にクランプ。circleVectorに対するposVectorの射影の長さの比率
+    float proj = clamp( dot(posVector, circleVector) / dot(circleVector, circleVector), 0.0, 1.0 );
+    // 射影の長さ
+    float len = length(posVector - circleVector * proj);
+
+    float gradient = 0.0;
+    // 円(一番外側）の内側であれば
+    if (length(posVector) < radius) {
+        float angle = fmod(time + atan2(posVector.y, posVector.x), PI2);
+        gradient = clamp(PI_DIV_2 - angle, 0.0, PI_DIV_2) / PI_DIV_2 * 0.5;
+    }
+   
+    return gradient + 1.0 - step(width, len);
+}
+
+float circleSDF(float2 pos, float2 center, float radius, float width){
+    // 原点を中心に移動
+    pos -= center;
+    // 原点からの距離
+    float len = length(pos);
+    // 円の内側にあるかどうかを判断する。内側なら1, 外側なら0 境界線のみ書く 
+    float result = step(radius - width / 2.0, len) - step(radius + width / 2.0, len);
+    // 0 or 1
+    return result;
+}
+
+float lineSDF(float x, float y, float width) {
+    // x - (width / 2.0) と x + (width / 2.0) の間にy(0.5)があれば1, なければ0
+    return step(x - (width / 2.0), y) - step(x + (width / 2.0), y);
+}
+
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    float2 uv = (float2)id.xy;
+    // 画面の中央に合わせる
+    float2 center = 0.5;
+    // アスペクト比を考慮して縦横の比率を合わせる
+    uv /= texWidth;
+    center.y /= aspectRatio;
+
+    // 中央に横の線を引く
+    float3 color = lineSDF(uv.y, center.y, 0.002) * axisColor.rgb;
+    // 中央に縦の線を引く
+    color += lineSDF(uv.x, center.x, 0.002) * axisColor.rgb;  
+
+    // 大きさの違う円三つを引く
+    color += circleSDF(uv, center, 0.45, 0.003) * axisColor.rgb;
+    color += circleSDF(uv, center, 0.3, 0.003) * axisColor.rgb;
+    color += circleSDF(uv, center, 0.15, 0.003) * axisColor.rgb;
+
+    // 回転する線をひく
+    color += rotateLineSDF(uv, center, 0.45, 0.003) * sweepColor.rgb;
+
+    float alpha = saturate(color.r + color.g + color.b);
+    float3 finalColor = lerp(source[id.xy].rgb, color, alpha);
+ 
+    outputTex[id.xy] = float4(finalColor, 1.0);
+}
