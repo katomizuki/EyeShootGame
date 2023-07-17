@@ -10,6 +10,9 @@ namespace View.Interface
        void MoveUpViewGroup();
        void MoveDownViewGroup();
        void ShowScrollView();
+       void ShowErrorAlert();
+       void ShowIndicator();
+       void HiddenIndicator();
        void HiddenScrollView();
 
        void SetOutlineSoftStar();

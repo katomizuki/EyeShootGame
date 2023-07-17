@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using System.Text;
 using UnityEngine;
 using TMPro;
@@ -50,6 +51,13 @@ namespace View
         private Material _hardStarMaterial;
         private Material _blaveStarMaterial;
         private static readonly int OutlineWidth = Shader.PropertyToID("_OutlineWidth");
+        [DllImport("__Internal")]
+        private static extern void present_alert(string title, string message);
+        
+        [DllImport("__Internal")]
+        private static extern void present_indicator();
+        [DllImport("__Internal")]
+        private static extern void hide_indicator();
 
         private void Start()
         {
@@ -115,6 +123,21 @@ namespace View
             _softStarMaterial.SetFloat(OutlineWidth,0f);
             _hardStarMaterial.SetFloat(OutlineWidth,0f);
             _blaveStarMaterial.SetFloat(OutlineWidth,7f);
+        }
+
+        public void ShowErrorAlert()
+        {
+            present_alert("Error!! ", "Please Restart the App");
+        }
+
+        public void ShowIndicator()
+        {
+            present_indicator();
+        }
+
+        public void HiddenIndicator()
+        {
+            hide_indicator();
         }
         
         public void MoveToMainARScene()

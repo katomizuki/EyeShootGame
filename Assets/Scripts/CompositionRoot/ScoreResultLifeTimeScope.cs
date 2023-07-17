@@ -16,7 +16,7 @@ namespace CompositionRoot
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent<IRankingScrollViewable>(rankingScrollView);
-            var resultRepository = new ResultRepository();
+            var resultRepository = new ScoreResultRepository();
             builder.RegisterInstance<IScoreResultUseCase>(new ScoreResultUseCase(resultRepository));
             builder.RegisterEntryPoint<ScoreRankingPresenter>();
         }

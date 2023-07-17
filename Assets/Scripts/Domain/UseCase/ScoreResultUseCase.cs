@@ -8,18 +8,18 @@ namespace Domain.UseCase
 {
     public sealed class ScoreResultUseCase: IScoreResultUseCase
     {
-        private readonly IResultRepository _resultRepository;
+        private readonly IScoreResultRepository _scoreResultRepository;
         
-        public ScoreResultUseCase(IResultRepository resultRepository)
+        public ScoreResultUseCase(IScoreResultRepository scoreResultRepository)
         {
-            this._resultRepository = resultRepository;
+            this._scoreResultRepository = scoreResultRepository;
         }
         
         public IObservable<ScoreDto[]> FetchScoreResult()
         {
             return Observable.FromCoroutine<ScoreDto[]>(
                 observer =>
-                    _resultRepository.GetResult(observer));
+                    _scoreResultRepository.GetResult(observer));
         }
     }
 }

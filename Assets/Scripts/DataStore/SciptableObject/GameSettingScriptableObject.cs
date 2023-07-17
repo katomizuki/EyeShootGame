@@ -12,20 +12,20 @@ namespace DataStore.SciptableObject
         public int numberOfEnemies = 10;
         public GameAttackMode gameAttackMode = GameAttackMode.Bullet;
         public string playerName = "John Doe";
-        public GameObject Meteorite => meteorites[(int)Random.Range(0, meteorites.Count - 1)];
-        [SerializeField] private List<GameObject> meteorites = new();
+        public GameObject Meteorite => _meteorites[(int)Random.Range(0, _meteorites.Count - 1)];
+        private List<GameObject> _meteorites = new();
         public StarBullet starBullet = StarBullet.Soft;
-        public GameObject Bullet => bullets[(int)starBullet];
-        [SerializeField] private List<GameObject> bullets = new();
+        public GameObject Bullet => _bullets[(int)starBullet];
+        private List<GameObject> _bullets = new();
         
-        public void SetupMeteorites(List<GameObject> meteorites)
+        public void SetupMeteorites(List<GameObject> values)
         {
-            this.meteorites = meteorites;
+            this._meteorites = values;
         }
         
-        public void SetupBullets(List<GameObject> bullets)
+        public void SetupBullets(List<GameObject> values)
         {
-            this.bullets = bullets;
+            this._bullets = values;
         }
     }
 }

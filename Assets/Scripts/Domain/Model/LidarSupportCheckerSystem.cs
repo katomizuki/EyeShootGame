@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
 

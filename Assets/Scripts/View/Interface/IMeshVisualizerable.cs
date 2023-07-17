@@ -1,5 +1,3 @@
-using System;
-using UniRx;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.XR.ARKit;

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace DataStore
+namespace DataStore.Repository
 {
     public sealed class LoadAddressableRepository: ILoadAddressableRepository 
     {
@@ -78,7 +78,7 @@ namespace DataStore
                     Addressables.Release(_hardStar);
                     break;
                 case StarBullet.Hard:
-                    Addressables.Release(_softStar);
+                    Addressables.Release(_beveledStar);
                     Addressables.Release(_softStar);
                     break;
             }

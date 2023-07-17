@@ -1,13 +1,19 @@
+using System.Text.Json.Serialization;
 
 namespace DataStore
 {
         [System.Serializable]
         public class ScoreResponseData 
         {
-            public float value { get; set; }
-            public string player_name { get; set; }
-            public int id { get; set; }
-            public string created_at { get; set; }
-            public string updated_at { get; set; }
+            [JsonPropertyName("value")]
+            public float Value { get; set; }
+            [JsonPropertyName("player_name")]
+            public string PlayerName { get; set; }
+            [JsonPropertyName("id")]
+            public int Id { get; set; }
+            [JsonPropertyName("created_at")]
+            public string CreatedAt { get; set; }
+            [JsonPropertyName("updated_at")]
+            public string UpdatedAt { get; set; }
         }
 }

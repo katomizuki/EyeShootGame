@@ -343,7 +343,7 @@ MonoBehaviour:
   coachingOverlayView: {fileID: 1197134736}
   warningPanelView: {fileID: 373524892}
   gameSettingScriptableObject: {fileID: 11400000, guid: f602193b8dd8347c8bf741a9017fcd70, type: 2}
-  poolSize: 20
+  poolSize: 10
   scoreView: {fileID: 727675509}
   meteoriteExplosion: {fileID: 198231724666311192, guid: e1d56fabc1a8a9d488987e65cebcbdb2, type: 3}
   radius: 1.994

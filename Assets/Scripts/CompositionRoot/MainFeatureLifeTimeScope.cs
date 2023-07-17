@@ -36,7 +36,7 @@ namespace CompositionRoot
             var lidarSupport = new LidarSupportCheckerSystem();
             var overlaySupportCheckerSystem = new OverlaySupportCheckerSystem();
             var gameSettingRepository = new GameSettingRepository(gameSettingScriptableObject);
-            var resultRepository = new ResultRepository();
+            var resultRepository = new ScoreResultRepository();
             var facePrefab = arFaceManager.facePrefab;
             var leftEyeGameObject = facePrefab.transform.GetChild(0).gameObject;
             var rightEyeGameObject = facePrefab.transform.GetChild(1).gameObject;

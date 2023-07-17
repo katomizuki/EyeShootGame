@@ -24,12 +24,22 @@ namespace Presenter
         
         public void PostInitialize()
         {
+            SetupPrefab();
             SubscribeDropDown();
             SubscribeNumSlider();
             SubscribeTimeSlider();
             SubscribePlayerNameInputField();
             SubscribeBulletSelectionButton();
             SubscribeGameStartButton();
+        }
+        
+        private async void SetupPrefab()
+        {
+            _gameSettingView.ShowIndicator();
+            var result = await _useCase.SetupPrefab();
+            _gameSettingView.HiddenIndicator();
+            if (!result)
+                _gameSettingView.ShowErrorAlert();
         }
 
         private void SubscribeDropDown()

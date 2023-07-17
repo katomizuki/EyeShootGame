@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 
 namespace DataStore.Repository
 {
-    public sealed class ResultRepository: IResultRepository
+    public sealed class ScoreResultRepository: IScoreResultRepository
     {
         private readonly string _apiUrl = "https://techtest.fly.dev/scores";
 
@@ -20,6 +20,7 @@ namespace DataStore.Repository
                 UnityWebRequest.Post(_apiUrl, jsonString)
                     .SetRequestHeader("Content-Type", "application/json");
                 var request = new UnityWebRequest(_apiUrl, "POST");
+                request.timeout = 10;
                 request.uploadHandler = new UploadHandlerRaw(bodyRaw);
                 request.downloadHandler = new DownloadHandlerBuffer();
                 request.SetRequestHeader("Content-Type", "application/json");
@@ -41,13 +42,14 @@ namespace DataStore.Repository
         public IEnumerator GetResult(IObserver<ScoreDto[]> observer)
         {
             var request = UnityWebRequest.Get(_apiUrl);
+            request.timeout = 10;
             request.SetRequestHeader("Content-Type", "application/json");
             yield return request.SendWebRequest();
             switch (request.result)
             {
                 case UnityWebRequest.Result.Success:
                     var result = JsonSerializer.Deserialize<ScoreResponseData[]>(request.downloadHandler.text)
-                        .Select(data => new ScoreDto(data.player_name, data.value)).ToArray();
+                        .Select(data => new ScoreDto(data.PlayerName, data.Value)).ToArray();
                     observer.OnNext(result);
                     observer.OnCompleted();
                     break;

@@ -5,7 +5,7 @@ using UniRx;
 
 namespace Domain.IRepository
 {
-    public interface IResultRepository
+    public interface IScoreResultRepository
     {
         IEnumerator PostResult(IObserver<Unit> observer, float score, string name);
         IEnumerator GetResult(IObserver<ScoreDto[]> observer);

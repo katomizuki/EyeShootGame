@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using Domain.IRepository;
 using Domain.Model;
 using Domain.UseCase.Interface;
+using UnityEngine;
 
 namespace Domain.UseCase
 {
@@ -14,15 +16,17 @@ namespace Domain.UseCase
         {
             this._gameSettingRepository = gameSettingRepository;
             this._loadAddressableRepository = loadAddressableRepository;
-            SetupPrefab();
         }
         
-        public async void SetupPrefab()
+        public async Task<bool> SetupPrefab()
         {   
            var asteroids = await _loadAddressableRepository.LoadAsteroid();
            var stars = await _loadAddressableRepository.LoadStars();
+           if (asteroids == null || stars == null || asteroids.Count < 3 || stars.Count < 3)
+               return false;
            _gameSettingRepository.SetupMeteorites(asteroids);
            _gameSettingRepository.SetupBullets(stars);
+           return true;
         }
         
         public void ChangePlayerName(string playerName)

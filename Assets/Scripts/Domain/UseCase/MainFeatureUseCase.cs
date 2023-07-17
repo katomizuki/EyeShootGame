@@ -18,7 +18,7 @@ namespace Domain.UseCase
         private readonly OverlaySupportCheckerSystem _overlaySupportCheckerSystem;
         private readonly IGameSettingRepository _gameSettingRepository;
         private readonly WinkTrackingSystem _winkTrackingSystem;
-        private readonly IResultRepository _resultRepository;
+        private readonly IScoreResultRepository _scoreResultRepository;
         private readonly ClassficationMeshSystem _classficationMeshSystem;
         private readonly ILoadAddressableRepository _loadAddressableRepository;
 
@@ -27,7 +27,7 @@ namespace Domain.UseCase
             LidarSupportCheckerSystem lidarSupportCheckerSystem,
             OverlaySupportCheckerSystem overlaySupportCheckerSystem,
             IGameSettingRepository gameSettingRepository,
-            IResultRepository resultRepository,
+            IScoreResultRepository scoreResultRepository,
             WinkTrackingSystem winkTrackingSystem,
             ClassficationMeshSystem classficationMeshSystem,
             ILoadAddressableRepository loadAddressableRepository
@@ -37,7 +37,7 @@ namespace Domain.UseCase
             this._lidarSupportCheckerSystem = lidarSupportCheckerSystem;
             this._overlaySupportCheckerSystem = overlaySupportCheckerSystem;
             this._gameSettingRepository = gameSettingRepository;
-            this._resultRepository = resultRepository;
+            this._scoreResultRepository = scoreResultRepository;
             this._winkTrackingSystem = winkTrackingSystem;
             this._classficationMeshSystem = classficationMeshSystem;
             this._loadAddressableRepository = loadAddressableRepository;
@@ -55,7 +55,7 @@ namespace Domain.UseCase
         {
             return Observable.FromCoroutine<Unit>(
                 observer =>
-                    _resultRepository.PostResult(
+                    _scoreResultRepository.PostResult(
                         observer,
                         scoreResult,
                         playerName));
