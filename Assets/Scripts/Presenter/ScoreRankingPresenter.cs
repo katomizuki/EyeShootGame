@@ -11,10 +11,12 @@ namespace Presenter
 {
     public sealed class ScoreRankingPresenter: IPostInitializable, IDisposable
     {
-        private readonly IRankingScrollViewable _rankingScrollViewable;
-        private readonly IScoreResultUseCase _useCase;
         private readonly CompositeDisposable _disposable = new();
-        
+        // View
+        private readonly IRankingScrollViewable _rankingScrollViewable;
+        // UseCase
+        private readonly IScoreResultUseCase _useCase;
+
         [Inject]
         ScoreRankingPresenter(
             IRankingScrollViewable rankingScrollViewable,

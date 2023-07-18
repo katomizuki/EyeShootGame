@@ -9,10 +9,11 @@ namespace Presenter
 {
     public sealed class GameSettingPresenter: IPostInitializable, IDisposable
     {
-        private readonly IGameSettingUseCase _useCase;
         private readonly CompositeDisposable _disposable = new();
+        // View 
         private readonly IGameSettingViewable _gameSettingView; 
-        
+        // UseCase
+        private readonly IGameSettingUseCase _useCase; 
         GameSettingPresenter(
             IGameSettingUseCase useCase,
             IGameSettingViewable gameSettingView)
@@ -37,6 +38,7 @@ namespace Presenter
             _gameSettingView.ShowIndicator();
             var result = await _useCase.SetupPrefab();
             _gameSettingView.HiddenIndicator();
+            // ロードに失敗したらエラーを表示
             if (!result)
                 _gameSettingView.ShowErrorAlert();
         }
@@ -48,6 +50,7 @@ namespace Presenter
                 {
                     var mode = (GameAttackMode)index;
                     _useCase.ChangeGameAttackMode(mode);
+                    // モードによってViewの表示を変更
                     switch (mode)
                     {
                         case GameAttackMode.Bullet:
@@ -133,6 +136,7 @@ namespace Presenter
             _gameSettingView.OnTapGameStartButtonAsObservable
                 .Subscribe(_ =>
                 {
+                    // 不要なリソースを解放 & メインシーンへ遷移
                     _useCase.ReleaseUnNeededGameObjects();
                     _gameSettingView.MoveToMainARScene();
                 })

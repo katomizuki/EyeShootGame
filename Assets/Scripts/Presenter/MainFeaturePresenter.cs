@@ -22,6 +22,7 @@ namespace Presenter
         private readonly IScoreViewable _scoreView;
         private readonly IEnemySpawner _enemySpawner;
         private readonly IObjectPool _heartObjectPool;
+        // hashMap
         private readonly Dictionary<int, GameObject> _hashMap = new();
         private int _currentDestroyedMeteorites;
         // UseCase

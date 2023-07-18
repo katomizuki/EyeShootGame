@@ -38,6 +38,7 @@ namespace Domain.Model
 
         private bool CheckEyeWink(ARKitBlendShapeCoefficient featureCoefficient)
         {
+            // ウィンク判定
             return (featureCoefficient is 
             { blendShapeLocation: ARKitBlendShapeLocation.EyeBlinkRight
                 or ARKitBlendShapeLocation.EyeBlinkRight,

@@ -18,8 +18,6 @@ namespace Presenter.ObjectPool
 
         public void SetupPool()
         {
-            Assert.IsNotNull(_targetPrefab);
-            
             _stack = new Stack<GameObject>();
             for (int i = 0; i < _poolSize; i++)
             {
@@ -38,7 +36,9 @@ namespace Presenter.ObjectPool
 
         public GameObject GetPooledObject()
         {
-            if (_stack != null && _stack.Count == 0)
+            Assert.IsNotNull(_stack);
+            
+            if (_stack.Count == 0)
             {
                 var newPooledObject = Object.Instantiate(_targetPrefab);
                 newPooledObject.SetActive(true);
