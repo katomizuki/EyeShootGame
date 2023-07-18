@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using Domain.IRepository;
 using Domain.Model;
 using Domain.UseCase.Interface;
-using UnityEngine;
 
 namespace Domain.UseCase
 {

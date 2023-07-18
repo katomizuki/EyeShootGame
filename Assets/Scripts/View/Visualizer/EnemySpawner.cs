@@ -16,7 +16,7 @@ namespace View.Visualizer
         private readonly List<ClashByTriggerWeapons> _eyeRayTriggers = new(); 
         private readonly Subject<GameObject> _onTriggerHitSubject = new();
         public IObservable<GameObject> OnTriggerHitObservable => _onTriggerHitSubject;
-        
+        private ParticleSystem _cachedParticleSystem;
         public EnemySpawner(
             ParticleSystem particleSystem, 
             float radius, 
@@ -44,9 +44,18 @@ namespace View.Visualizer
 
         private void OnTriggerHit(GameObject go)
         {
-            Object.Instantiate(_particleSystem, go.transform.position, Quaternion.identity);
-            _particleSystem.Play();
-            _onTriggerHitSubject.OnNext(go);
+            if (_cachedParticleSystem == null)
+            {
+                _cachedParticleSystem = Object.Instantiate(_particleSystem, go.transform.position, Quaternion.identity);
+                _cachedParticleSystem.Play();
+                _onTriggerHitSubject.OnNext(go);
+            }
+            else
+            {
+                _cachedParticleSystem.transform.SetPositionAndRotation(go.transform.position, Quaternion.identity);
+                _cachedParticleSystem.Play();
+                _onTriggerHitSubject.OnNext(go); 
+            }
         }
 
         public void Dispose()

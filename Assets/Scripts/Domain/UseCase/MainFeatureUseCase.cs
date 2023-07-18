@@ -64,8 +64,8 @@ namespace Domain.UseCase
         public bool IsClassificationsDisabled(NativeArray<ARMeshClassification> faceClassifications) =>
             (!faceClassifications.IsCreated || faceClassifications.Length <= 0);
 
-        public TrackableId GetTrackableId(string meshFilterName) => _classficationMeshSystem.MakeTrackableId(meshFilterName);
-        public NativeArray<ARMeshClassification> GetClassificationsRawData(TrackableId meshId) => _classficationMeshSystem.MakeClassificationsRawData(meshId);
+        public TrackableId GetTrackableId(string meshFilterName) => _classficationMeshSystem.GetTrackableId(meshFilterName);
+        public NativeArray<ARMeshClassification> GetClassificationsRawData(TrackableId meshId) => _classficationMeshSystem.GetClassificationsRawData(meshId);
         public IObservable<MeshFilter> AddedMeshObservable => _classficationMeshSystem.AddedMeshObservable;
         public IObservable<MeshFilter> UpdatedMeshObservable => _classficationMeshSystem.UpdatedMeshObservable;
         public IObservable<MeshFilter> RemovedMeshObservable => _classficationMeshSystem.RemovedMeshObservable;
@@ -73,8 +73,12 @@ namespace Domain.UseCase
         public void ReleaseGameObjects()
         {
             _loadAddressableRepository.ReleaseAsteroid();
-            var starBullet = _gameSettingRepository.GetGameSetting().StarBullet;
-            _loadAddressableRepository.ReleaseStar(starBullet);
+            var gameSetting = _gameSettingRepository.GetGameSetting();
+            if (gameSetting.GameAttackMode == GameAttackMode.Bullet)
+            {
+                var starBullet = gameSetting.StarBullet; 
+                _loadAddressableRepository.ReleaseStar(starBullet); 
+            }
         }
     }
 }

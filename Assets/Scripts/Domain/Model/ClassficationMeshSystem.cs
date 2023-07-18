@@ -56,13 +56,13 @@ namespace Domain.Model
         private bool IsClassificationEnabled
             => (_arMeshManager != null) && (_arMeshManager.subsystem is XRMeshSubsystem meshSubsystem);
 
-        public TrackableId MakeTrackableId(string meshFilterName)
+        public TrackableId GetTrackableId(string meshFilterName)
         {
             string[] nameSplit = meshFilterName.Split(' ');
             return new TrackableId(nameSplit[1]);
         }
 
-        public NativeArray<ARMeshClassification> MakeClassificationsRawData(TrackableId meshId)
+        public NativeArray<ARMeshClassification> GetClassificationsRawData(TrackableId meshId)
         {
             XRMeshSubsystem meshSubsystem = _arMeshManager.subsystem;
             var faceClassifications = meshSubsystem.GetFaceClassifications(meshId, Allocator.Persistent);

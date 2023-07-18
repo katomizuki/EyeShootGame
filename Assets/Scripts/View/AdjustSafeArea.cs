@@ -5,7 +5,7 @@ namespace View
     [RequireComponent(typeof(RectTransform))]
     internal sealed class AdjustSafeArea : MonoBehaviour
     {
-        private void Start()
+        private void Awake()
         {
             var rectTransform = GetComponent<RectTransform>();
             var safeArea = Screen.safeArea;

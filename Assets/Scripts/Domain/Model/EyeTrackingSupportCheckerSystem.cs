@@ -24,7 +24,7 @@ namespace Domain.Model
             ARSession.stateChanged += OnStateChanged;
         }
 
-        private EyeTrackingState MakeEyeTracking(ARSessionState state)
+        private EyeTrackingState GetEyeTracking(ARSessionState state)
         {
             return (IsArSessionReady(state), IsSupportEyeTracking) switch 
             {
@@ -37,7 +37,7 @@ namespace Domain.Model
 
         private void OnStateChanged(ARSessionStateChangedEventArgs args)
         {
-            _onArSessionStateChangedSubject.OnNext(MakeEyeTracking(args.state));
+            _onArSessionStateChangedSubject.OnNext(GetEyeTracking(args.state));
         }
 
         private bool IsSupportEyeTracking => _arFaceManager.descriptor.supportsEyeTracking;

@@ -7,7 +7,7 @@ using UnityEngine.XR.ARSubsystems;
 using View.Interface;
 using Object = UnityEngine.Object;
 
-namespace View
+namespace View.Visualizer
 {
     public sealed class MeshVisualizer: IMeshVisualizerable
     {
